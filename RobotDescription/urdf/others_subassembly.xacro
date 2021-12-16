@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="subassembly">
+  
+    <link name="base_footprint" >
+        <visual>
+            <geometry>
+                <mesh filename="package://RobotDescription/meshes/others_subassembly/worktop.STL" />
+            </geometry>
+            <origin xyz="-1.5 1.5 -0.85" rpy="1.57079 0.0 0.0"/>
+            <material name="LightGrey">
+                <color rgba="0.7 0.7 0.7 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://RobotDescription/meshes/others_subassembly/worktop.STL" />
+                <origin xyz="-1.5 1.5 -0.85" rpy="1.57079 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <xacro:cylinder_inertial radius="1.5" length="1" mass="1000">
+            <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        </xacro:cylinder_inertial>
+    </link>
+    
+    <gazebo reference="base_footprint">
+        <material>Gazebo/White</material>
+    </gazebo>
+
+    <joint name="camera12basefootprint" type="fixed">
+        <parent link="base_footprint" />
+        <child link = "camera1" />
+        <origin xyz="0.0 1.4 0.65" rpy="0.0 0.0 -1.57079" />
+    </joint>
+
+    <link name="camera1" >
+        <visual>
+            <geometry>
+                <mesh filename="package://RobotDescription/meshes/others_subassembly/camera.STL" />
+            </geometry>
+            <origin xyz="-0.075 0.05 -0.05" rpy="1.57079 0.0 0.0"/>
+            <material name="red">
+                <color rgba="1 0 0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://RobotDescription/meshes/others_subassembly/camera.STL" />
+                <origin xyz="-0.075 -0.05 -0.05" rpy="1.57079 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <xacro:cylinder_inertial radius="0.05" length="0.1" mass="0.5">
+            <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        </xacro:cylinder_inertial>
+    </link>
+    
+    <gazebo reference="camera1">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <joint name="camera22basefootprint" type="fixed">
+        <parent link="base_footprint" />
+        <child link = "camera2" />
+        <origin xyz="-1.4 0 0.65" rpy="0.0 0.0 0.0" />
+    </joint>
+    
+    <link name="camera2" >
+        <visual>
+            <geometry>
+                <mesh filename="package://RobotDescription/meshes/others_subassembly/camera.STL" />
+            </geometry>
+            <origin xyz="-0.075 0.05 -0.05" rpy="1.57079 0.0 0.0"/>
+            <material name="red">
+                <color rgba="1 0 0 1.0"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://RobotDescription/meshes/others_subassembly/camera.STL" />
+                <origin xyz="-0.075 -0.05 -0.05" rpy="1.57079 0.0 0.0"/>
+            </geometry>
+        </collision>
+        <xacro:cylinder_inertial radius="0.05" length="0.1" mass="0.5">
+            <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        </xacro:cylinder_inertial>
+    </link>
+
+    <gazebo reference="camera2">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+</robot>

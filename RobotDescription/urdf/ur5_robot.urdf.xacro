@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro"
+       name="ur5" >
+
+  <xacro:arg name="transmission_hw_interface" default="PositionJointInterface"/>
+
+  <!-- common stuff -->
+  <xacro:include filename="$(find RobotDescription)/urdf/common.gazebo.xacro" />
+
+  <!-- ur5 -->
+  <xacro:include filename="$(find RobotDescription)/urdf/ur5.urdf.xacro" />
+
+  <!-- subassembly -->
+  <xacro:include filename="$(find RobotDescription)/urdf/others_subassembly.xacro" />
+  
+  <xacro:include filename="$(find RobotDescription)/urdf/senser/camera_config.xacro" />
+
+  <!-- arm -->
+  <xacro:ur5_robot prefix="" joint_limited="false"
+    transmission_hw_interface="$(arg transmission_hw_interface)"
+  />
+
+  <link name="world" />
+
+  <joint name="world_joint" type="fixed">
+    <parent link="world" />
+    <child link = "base_footprint" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+  </joint>
+
+  <joint name="base2footprint" type="fixed">
+    <parent link="base_footprint" />
+    <child link = "base_link" />
+    <origin xyz="0.0 0.0 0.3" rpy="0.0 0.0 0.0" />
+  </joint>
+
+</robot>
